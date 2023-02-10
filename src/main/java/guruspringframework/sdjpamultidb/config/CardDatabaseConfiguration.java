@@ -31,7 +31,10 @@ public class CardDatabaseConfiguration {
 	}
 	
 	@Bean
-	public DataSource cardDataSource(@Qualifier("cardDataSourceProperties") DataSourceProperties cardDataSourceProperties) {
+	public DataSource cardDataSource(
+		@Qualifier("cardDatasourceProperties")
+		DataSourceProperties cardDataSourceProperties
+	) {
 		return cardDataSourceProperties.initializeDataSourceBuilder()
 				.type(HikariDataSource.class)
 				.build();
@@ -39,7 +42,8 @@ public class CardDatabaseConfiguration {
 	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean cardEntityManagerFactory(
-		@Qualifier("cardDataSource") DataSource cardDataSource,
+		@Qualifier("cardDataSource")
+		DataSource cardDataSource,
 		EntityManagerFactoryBuilder builder
 	) {
 		return builder.dataSource(cardDataSource)

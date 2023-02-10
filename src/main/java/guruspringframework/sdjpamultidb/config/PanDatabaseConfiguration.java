@@ -34,7 +34,10 @@ public class PanDatabaseConfiguration {
 	
 	@Primary
 	@Bean
-	public DataSource panDataSource( @Qualifier("panDataSourceProperties") DataSourceProperties panDataSourceProperties) {
+	public DataSource panDataSource(
+		@Qualifier("panDataSourceProperties")
+		DataSourceProperties panDataSourceProperties
+	) {
 		return panDataSourceProperties.initializeDataSourceBuilder()
 				.type(HikariDataSource.class)
 				.build();
@@ -43,7 +46,8 @@ public class PanDatabaseConfiguration {
 	@Primary
 	@Bean
 	public LocalContainerEntityManagerFactoryBean panEntityManagerFactory(
-		@Qualifier("panDataSource") DataSource panDataSource,
+		@Qualifier("panDataSource")
+		DataSource panDataSource,
 		EntityManagerFactoryBuilder builder
 	) {
 		return builder.dataSource(panDataSource)
@@ -56,7 +60,8 @@ public class PanDatabaseConfiguration {
 	@Primary
 	@Bean
 	public PlatformTransactionManager panTransactionManager(
-		@Qualifier("panEntityManagerFactory") LocalContainerEntityManagerFactoryBean panEntityManagerFactory
+		@Qualifier("panEntityManagerFactory")
+		LocalContainerEntityManagerFactoryBean panEntityManagerFactory
 	) {
 		return new JpaTransactionManager(panEntityManagerFactory.getObject());
 	}

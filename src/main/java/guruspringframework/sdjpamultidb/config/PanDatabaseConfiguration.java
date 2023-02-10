@@ -34,6 +34,7 @@ public class PanDatabaseConfiguration {
 	
 	@Primary
 	@Bean
+	@ConfigurationProperties("spring.pan.datasource.hikari")
 	public DataSource panDataSource(
 		@Qualifier("panDataSourceProperties")
 		DataSourceProperties panDataSourceProperties

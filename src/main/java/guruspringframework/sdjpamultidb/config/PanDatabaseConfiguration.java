@@ -56,6 +56,7 @@ public class PanDatabaseConfiguration {
 		
 		Properties props = new Properties();
 		props.put("hibernate.hbm2ddl.auto", "validate");
+		props.put("hibernate.physical_naming_strategy", "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy");
 		
 		LocalContainerEntityManagerFactoryBean efb =
 		builder.dataSource(panDataSource)
